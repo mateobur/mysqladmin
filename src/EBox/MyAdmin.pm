@@ -61,8 +61,8 @@ use constant {
 sub _create
 {
     my $class = shift;
-    my $self = $class->SUPER::_create(name => 'myadmin',
-                                      printableName => __('phpMyAdmin'),
+    my $self = $class->SUPER::_create(name => 'phpmyadmin',
+                                      printableName => __('MySQL Manager'),
                                       @_);
     bless($self, $class);
     return $self;
@@ -200,35 +200,12 @@ sub menu
 {
     my ($self, $root) = @_;
 
-#    XXX commented out until external connections work as intended
-#     my $folder = new EBox::Menu::Folder(
-#                       'name' => 'WebMail',
-#                       'text' => $self->printableName(),
-#                       'separator' => 'Communications',
-#                       'order' => 700,
-#     );
-
-#     $folder->add(
-#                  new EBox::Menu::Item(
-#                         'url' => 'WebMail/Composite/Backend',
-#                         'text' => __('Backend')
-#                    )
-#     );
-
-#     $folder->add(
-#                  new EBox::Menu::Item(
-#                         'url' => 'WebMail/View/Options',
-#                         'text' => __('Options')
-#                    )
-#     );
-
-#     $root->add($folder);
-
     $root->add(
                new EBox::Menu::Item(
                    'url' => 'WebMail/View/Options',
                    'text' => $self->printableName(),
-                   'separator' => 'Communications',
+                   'separator' => 'Infrastructure',
+                   'order' => 455,
               )
     );
 }
