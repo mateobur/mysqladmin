@@ -1,0 +1,15 @@
+class: 'EBox::MyAdmin'
+
+enabledepends:
+    - myadmin
+
+models:
+    - Options
+    - OperationMode
+    - RemoteServerConfiguration
+
+composites:
+    Backend: [myadmin/OperationMode, myadmi/RemoteServerConfiguration]
+
+notifyactions:
+    Options: [myadmin/VHostTable]
