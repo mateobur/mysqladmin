@@ -48,7 +48,7 @@ sub _table
                                disableCache => 1,
                                defaultValue => 'disabled',
                                help =>
-__('Virtual host where the webmail will be installed. This will disable the default /phpmyadmin url.')
+__('Virtual host where the MySql manager will be installed. This will disable the default /phpmyadmin url.')
                               ),
         );
 
@@ -103,7 +103,7 @@ sub notifyForeignModelAction
             $myRow->elementByName('vHost')->setValue('disabled');
             $myRow->store();
             return __('The deleted virtual host was selected for ' .
-                      'Webmail. Maybe you want to select another one now.');
+                      'PhpMyAdmin. Maybe you want to select another one now.');
         }
     }
     return '';

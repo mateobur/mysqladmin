@@ -1,4 +1,3 @@
 <%args>
 </%args>
-Alias /program/js/tiny_mce/ /usr/share/tinymce/www/
-Alias /webmail /var/lib/roundcube
+Alias /phpmyadmin /usr/share/phpmyadmin
