@@ -61,7 +61,7 @@ use constant {
 sub _create
 {
     my $class = shift;
-    my $self = $class->SUPER::_create(name => 'MyAdmin',
+    my $self = $class->SUPER::_create(name => 'myadmin',
                                       printableName => __('MySQL Manager'),
                                       @_);
     bless($self, $class);

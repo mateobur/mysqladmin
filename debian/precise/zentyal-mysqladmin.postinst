@@ -3,7 +3,7 @@
 case "$1" in
 	configure)
 
-        /usr/share/zentyal/initial-setup phpmyadmin $2
+        /usr/share/zentyal/initial-setup mysqladmin $2
 
         dpkg-trigger --no-await zentyal-core
 esac

@@ -1,4 +1,4 @@
-zentyal-phpmyadmin (3.0) precise; urgency=low
+zentyal-mysqladmin (3.0) precise; urgency=low
 
   * New upstream release
 

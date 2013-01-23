@@ -1,14 +1,14 @@
-Source: zentyal-phpmyadmin
+Source: zentyal-mysqladmin
 Section: web
 Priority: optional
 Maintainer: José Antonio Calvo <jacalvo@zentyal.org>
 Build-Depends: zbuildtools
 Standards-Version: 3.9.2
 
-Package: zentyal-phpmyadmin
+Package: zentyal-mysqladmin
 Architecture: all
 Depends: zentyal-core (>= 3.0), zentyal-core (<< 3.0.100), zentyal-webserver, phpmyadmin
-Description: Zentyal - phpMyAdmin
+Description: Zentyal - MysqlAdmin
  Zentyal is a Linux small business server that can act as
  a Gateway, Unified Threat Manager, Office Server, Infrastructure
  Manager, Unified Communications Server or a combination of them. One
