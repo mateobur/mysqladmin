@@ -56,7 +56,7 @@ use constant {
 #
 # Returns:
 #
-#        <EBox::WebMail> - the recently created module
+#        <EBox::MyAdmin> - the recently created module
 #
 sub _create
 {
