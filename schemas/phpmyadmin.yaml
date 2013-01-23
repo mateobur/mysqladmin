@@ -12,4 +12,4 @@ composites:
     Backend: [myadmin/OperationMode, myadmi/RemoteServerConfiguration]
 
 notifyactions:
-    Options: [myadmin/VHostTable]
+    Options: [webserver/VHostTable]
