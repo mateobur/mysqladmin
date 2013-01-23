@@ -9,7 +9,7 @@ models:
     - RemoteServerConfiguration
 
 composites:
-    Backend: [myadmin/OperationMode, myadmi/RemoteServerConfiguration]
+    Backend: [myadmin/OperationMode, myadmin/RemoteServerConfiguration]
 
 notifyactions:
     Options: [webserver/VHostTable]
