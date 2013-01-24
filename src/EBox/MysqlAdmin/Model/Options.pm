@@ -14,7 +14,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-package EBox::MyAdmin::Model::Options;
+package EBox::MysqlAdmin::Model::Options;
 use base 'EBox::Model::DataForm';
 
 use strict;
@@ -55,8 +55,8 @@ __('Virtual host where the MySql manager will be installed. This will disable th
       my $dataForm = {
                       tableName          => __PACKAGE__->nameFromClass(),
                       printableTableName => __('General configuration'),
-                      pageTitle          => __('MyAdmin'),
-                      modelDomain        => 'MyAdmin',
+                      pageTitle          => __('MysqlAdmin'),
+                      modelDomain        => 'MysqlAdmin',
                       defaultActions     => [ 'editField', 'changeView' ],
                       tableDescription   => \@tableDesc,
                      };
@@ -103,7 +103,7 @@ sub notifyForeignModelAction
             $myRow->elementByName('vHost')->setValue('disabled');
             $myRow->store();
             return __('The deleted virtual host was selected for ' .
-                      'PhpMyAdmin. Maybe you want to select another one now.');
+                      'PhpMysqlAdmin. Maybe you want to select another one now.');
         }
     }
     return '';

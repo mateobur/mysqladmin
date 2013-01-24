@@ -14,7 +14,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-package EBox::MyAdmin::Composite::Backend;
+package EBox::MysqlAdmin::Composite::Backend;
 
 use base 'EBox::Model::Composite';
 
@@ -55,8 +55,8 @@ sub _description
     my $description = {
          layout          => 'tabbed',
          name            =>  __PACKAGE__->nameFromClass,
-         pageTitle       => __('MyAdmin backend'),
-         compositeDomain => 'MyAdmin',
+         pageTitle       => __('MysqlAdmin backend'),
+         compositeDomain => 'MysqlAdmin',
     };
 
     return $description;

@@ -13,12 +13,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-# Class: EBox::MyAdmin
+# Class: EBox::MysqlAdmin
 #
 #      Class description
 #
 
-package EBox::MyAdmin;
+package EBox::MysqlAdmin;
 
 use strict;
 use warnings;
@@ -56,12 +56,12 @@ use constant {
 #
 # Returns:
 #
-#        <EBox::MyAdmin> - the recently created module
+#        <EBox::MysqlAdmin> - the recently created module
 #
 sub _create
 {
     my $class = shift;
-    my $self = $class->SUPER::_create(name => 'myadmin',
+    my $self = $class->SUPER::_create(name => 'mysqladmin',
                                       printableName => __('MySQL Manager'),
                                       @_);
     bless($self, $class);
@@ -101,7 +101,7 @@ sub menu
 
     $root->add(
                new EBox::Menu::Item(
-                   'url' => 'MyAdmin/View/Options',
+                   'url' => 'MysqlAdmin/View/Options',
                    'text' => $self->printableName(),
                    'separator' => 'Infrastructure',
                    'order' => 455,

@@ -14,7 +14,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-package EBox::MyAdmin::Model::OperationMode;
+package EBox::MysqlAdmin::Model::OperationMode;
 use base 'EBox::Model::DataForm';
 
 use strict;
@@ -54,7 +54,7 @@ sub _table
                       tableName          => __PACKAGE__->nameFromClass(),
                       printableTableName => __('Operation mode'),
                       headTitle          => undef,
-                      modelDomain        => 'MyAdmin',
+                      modelDomain        => 'MysqlAdmin',
                       defaultActions     => [ 'editField', 'changeView' ],
                       tableDescription   => \@tableDesc,
 
