@@ -5,11 +5,6 @@ enabledepends:
 
 models:
     - Options
-    - OperationMode
-    - RemoteServerConfiguration
-
-composites:
-    Backend: [mysqladmin/OperationMode, mysqladmin/RemoteServerConfiguration]
 
 notifyactions:
     Options: [webserver/VHostTable]
