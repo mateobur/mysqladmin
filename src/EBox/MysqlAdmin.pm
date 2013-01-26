@@ -137,6 +137,15 @@ sub enableModDepends
 sub _setWebServerConf
 {
     my ($self) = @_;
+    my @cmd = ();
+
+    my $vHostPattern = EBox::WebServer::SITES_AVAILABLE_DIR . 'user-' .
+                       EBox::WebServer::VHOST_PREFIX. '*/ebox-mysqladmin';
+    push(@cmd, 'rm -f ' . "$vHostPattern");
+
+    my $globalPattern = EBox::WebServer::GLOBAL_CONF_DIR . 'ebox-mysqladmin';
+    push(@cmd, 'rm -f ' . "$globalPattern");
+    EBox::Sudo::root(@cmd);
 
     return unless $self->isEnabled();
 
