@@ -33,14 +33,7 @@ use EBox::WebServer;
 use File::Slurp;
 
 use constant {
-    MAIN_INC_FILE => '/etc/roundcube/main.inc.php',
-    DES_KEY_FILE  => EBox::Config::conf() . 'roundcube.key',
-    SIEVE_PLUGIN_INC_USR_FILE =>
-           '/usr/share/roundcube/plugins/managesieve/config.inc.php',
-    SIEVE_PLUGIN_INC_ETC_FILE =>
-           '/etc/roundcube/managesieve-config.inc.php',
-    ROUNDCUBE_DIR => '/var/lib/roundcube',
-    HTTPD_WEBMAIL_DIR => '/var/www/webmail',
+#    HTTPD_WEBMAIL_DIR => '/var/www/webmail',
 };
 
 
@@ -62,7 +55,7 @@ sub _create
 {
     my $class = shift;
     my $self = $class->SUPER::_create(name => 'mysqladmin',
-                                      printableName => __('MySQL Manager'),
+                                      printableName => __('Mysql Manager'),
                                       @_);
     bless($self, $class);
     return $self;
@@ -79,10 +72,9 @@ sub _create
 sub _setConf
 {
     my ($self) = @_;
-
-    my $params;
-
     my $options = $self->model('Options');
+
+    $self->_setWebServerConf();
 }
 
 # Group: Public methods
@@ -146,27 +138,17 @@ sub _setWebServerConf
 {
     my ($self) = @_;
 
-    # Delete all possible zentyal-webmail configuration
-    my @cmd = ();
-    push(@cmd, 'rm -f ' . HTTPD_WEBMAIL_DIR);
-    my $vHostPattern = EBox::WebServer::SITES_AVAILABLE_DIR . 'user-' .
-                       EBox::WebServer::VHOST_PREFIX. '*/ebox-webmail';
-    push(@cmd, 'rm -f ' . "$vHostPattern");
-    my $globalPattern = EBox::WebServer::GLOBAL_CONF_DIR . 'ebox-webmail';
-    push(@cmd, 'rm -f ' . "$globalPattern");
-    EBox::Sudo::root(@cmd);
-
     return unless $self->isEnabled();
 
     my $vhost = $self->model('Options')->vHostValue();
 
     if ($vhost eq 'disabled') {
-        my $destFile = EBox::WebServer::GLOBAL_CONF_DIR . 'ebox-webmail';
-        $self->writeConfFile($destFile, 'webmail/apache.mas', []);
+        my $destFile = EBox::WebServer::GLOBAL_CONF_DIR . 'ebox-mysqladmin';
+        $self->writeConfFile($destFile, 'mysqladmin/apache.mas', []);
     } else {
         my $destFile = EBox::WebServer::SITES_AVAILABLE_DIR . 'user-' .
-                       EBox::WebServer::VHOST_PREFIX. $vhost .'/ebox-webmail';
-        $self->writeConfFile($destFile, 'webmail/apache.mas', []);
+                       EBox::WebServer::VHOST_PREFIX. $vhost .'/ebox-mysqladmin';
+        $self->writeConfFile($destFile, 'mysqladmin/apache.mas', []);
     }
 }
 
