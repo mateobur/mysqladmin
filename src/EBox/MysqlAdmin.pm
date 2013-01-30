@@ -91,14 +91,28 @@ sub menu
 {
     my ($self, $root) = @_;
 
-    $root->add(
+    my $folder = new EBox::Menu::Folder('name' => 'PhpMyAdmin',
+                                        'text' => $self->printableName(),
+                                        'separator' => 'Infrastructure',
+                                        'order' => 455);
+    
+
+   $folder->add(
                new EBox::Menu::Item(
                    'url' => 'MysqlAdmin/View/Options',
-                   'text' => $self->printableName(),
-                   'separator' => 'Infrastructure',
-                   'order' => 455,
+                   'text' => 'Webserver',
               )
     );
+
+    $folder->add(
+               new EBox::Menu::Item(
+                   'url' => 'MysqlAdmin/View/Hosts',
+                   'text' => 'MySQL Hosts',
+              )
+    );
+
+
+    $root->add($folder);
 }
 
 # Method: usedFiles
