@@ -23,6 +23,7 @@ use warnings;
 use EBox::Global;
 use EBox::Gettext;
 use EBox::Types::Text;
+use EBox::Types::Host;
 use EBox::Types::Select;
 use EBox::Exceptions::External;
 
@@ -64,13 +65,13 @@ sub _table
 
         my $dataTable =
     {
-        tableName          => 'SQL Hosts',
+        tableName          => 'SQLHosts',
         printableTableName => __('MySQL Hosts'),
         printableRowName   => __('Host'),
         defaultActions     => ['add', 'del', 'editField', 'changeView' ],
         tableDescription   => \@tableHeader,
         class              => 'dataTable',
-        sortedBy           => 'module',
+        sortedBy           => 'host',
         modelDomain        => 'MysqlAdmin',
     };
 
