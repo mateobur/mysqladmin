@@ -65,7 +65,7 @@ sub _table
 
         my $dataTable =
     {
-        tableName          => 'SQLHosts',
+        tableName          => 'Hosts',
         printableTableName => __('MySQL Hosts'),
         printableRowName   => __('Host'),
         defaultActions     => ['add', 'del', 'editField', 'changeView' ],
