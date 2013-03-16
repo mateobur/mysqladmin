@@ -175,10 +175,8 @@ sub _setWebServerConf
     }
 
     my $hostModel = $self->model('Hosts');
-    my @params = ();
-    push(@params, sqlhosts => $hostModel->getHosts());
 
-    $self->writeConfFile('/etc/phpmyadmin/config.inc.php','mysqladmin/config.inc.php.mas', \@params);
+    $self->writeConfFile('/etc/phpmyadmin/config.inc.php','mysqladmin/config.inc.php.mas', [ sqlhosts => $hostModel->getHosts() ]);
 }
 
 # Method: initialSetup

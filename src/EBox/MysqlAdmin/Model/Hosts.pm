@@ -78,12 +78,11 @@ sub getHosts
     my @hosts = ();
 
     foreach my $id (@{$self->enabledRows()}) {
-	my $row = $self->row($id);
-	my %host=();
 
-        $host{'host'} = $row->valueByName('host');
-        $host{'port'} = $row->valueByName('port');
-        push (@hosts, \%host);
+        my $row = $self->row($id);
+        my $host = $row->valueByName('host');
+        my $port = $row->valueByName('port');
+        push (@hosts, {host => $host, port => $port});
 
     }
     return \@hosts;
