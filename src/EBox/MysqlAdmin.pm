@@ -173,6 +173,34 @@ sub _setWebServerConf
                        EBox::WebServer::VHOST_PREFIX. $vhost .'/ebox-mysqladmin';
         $self->writeConfFile($destFile, 'mysqladmin/apache.mas', []);
     }
+
+    my $hostModel = $self->model('Hosts');
+    my @params = ();
+    push(@params, sqlhosts => $hostModel->getHosts());
+
+    $self->writeConfFile('/etc/phpmyadmin/config.inc.php','mysqladmin/config.inc.php.mas', \@params);
 }
+
+# Method: initialSetup
+#
+# Overrides:
+#   EBox::Module::Base::initialSetup
+#
+sub initialSetup
+{
+    my ($self, $version) = @_;
+
+    $self->SUPER::initialSetup($version);
+
+   if (not $version) {
+       # Create default rules only if installing the first time
+        # Add localhost as default MySQL server
+        $self->model('Hosts')->add(
+            host => 'localhost',
+            port => 3306,
+        );
+    } 
+}
+
 
 1;

@@ -39,16 +39,8 @@ sub new
 
 sub _table
 {
-    my @tableHeader =
+   my @tableHeader =
    ( 
-    new EBox::Types::Text(
-                                fieldName     => 'hostId',
-                                printableName =>  'hostId',
-                                unique        => 1,
-                                hidden        => 1,
-                                editable      => 0,
-                               ),
-
      new EBox::Types::Host(
            'fieldName'     => 'host',
            'printableName' => __('Hostname'),
@@ -63,7 +55,7 @@ sub _table
        ),
      );
 
-        my $dataTable =
+    my $dataTable =
     {
         tableName          => 'Hosts',
         printableTableName => __('MySQL Hosts'),
@@ -78,5 +70,24 @@ sub _table
     return $dataTable;
  
 }
+
+sub getHosts
+{
+    my ($self) = @_;
+
+    my @hosts = ();
+
+    foreach my $id (@{$self->enabledRows()}) {
+	my $row = $self->row($id);
+	my %host=();
+
+        $host{'host'} = $row->valueByName('host');
+        $host{'port'} = $row->valueByName('port');
+        push (@hosts, \%host);
+
+    }
+    return \@hosts;
+}
+
 
 1;
