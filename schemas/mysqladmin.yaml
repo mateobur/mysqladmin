@@ -6,6 +6,7 @@ enabledepends:
 models:
     - Options
     - Hosts
+    - Admin
 
 notifyactions:
     Options: [webserver/VHostTable]

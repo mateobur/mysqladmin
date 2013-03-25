@@ -95,7 +95,6 @@ sub menu
                                         'text' => $self->printableName(),
                                         'separator' => 'Infrastructure',
                                         'order' => 455);
-    
 
    $folder->add(
                new EBox::Menu::Item(
@@ -108,6 +107,13 @@ sub menu
                new EBox::Menu::Item(
                    'url' => 'MysqlAdmin/View/Hosts',
                    'text' => 'MySQL Hosts',
+              )
+    );
+
+    $folder->add(
+              new EBox::Menu::Item(
+                  'url' => 'MysqlAdmin/View/Admin',
+                  'text' => 'MySQL Local Admins',
               )
     );
 
@@ -197,7 +203,7 @@ sub initialSetup
             host => 'localhost',
             port => 3306,
         );
-    } 
+    }
 }
 
 
