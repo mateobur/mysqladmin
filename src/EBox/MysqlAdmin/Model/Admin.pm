@@ -27,7 +27,7 @@ use EBox::Types::Password;
 use EBox::Types::Host;
 use EBox::Types::Select;
 use EBox::Exceptions::External;
-use EBox::DBEngineFactory;
+use EBox::MysqlAdmin::RootDBEngine;
 
 sub new
 {
@@ -45,9 +45,9 @@ sub addedRowNotify
         my $adminname = $row->valueByName('username');
         my $password = $row->valueByName('password');
 
-        my $dbengine = EBox::DBEngineFactory::DBEngine();
-	$dbengine->sqlAsSuperuser(sql => 'CREATE USER \'' . $adminname . '\'@\'localhost\' IDENTIFIED BY \''. $password . '\';'); 
-	$dbengine->sqlAsSuperuser(sql => 'GRANT ALL PRIVILEGES ON *.* TO \'' . $adminname . '\'@\'localhost\' WITH GRANT OPTION;');
+        my $dbengine = new EBox::MysqlAdmin::RootDBEngine();
+	$dbengine->do('CREATE USER \'' . $adminname . '\'@\'localhost\' IDENTIFIED BY \''. $password . '\';'); 
+	$dbengine->do('GRANT ALL PRIVILEGES ON *.* TO \'' . $adminname . '\'@\'localhost\' WITH GRANT OPTION;');
 }
 
 sub _table
