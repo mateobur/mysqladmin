@@ -27,6 +27,7 @@ use EBox::Types::Password;
 use EBox::Types::Host;
 use EBox::Types::Select;
 use EBox::Exceptions::External;
+use EBox::DBEngineFactory;
 
 sub new
 {
@@ -36,6 +37,17 @@ sub new
     bless($self, $class);
 
     return $self;
+}
+
+sub addedRowNotify
+{
+	my ($self, $row) = @_;
+        my $adminname = $row->valueByName('username');
+        my $password = $row->valueByName('password');
+
+        my $dbengine = EBox::DBEngineFactory::DBEngine();
+	$dbengine->sqlAsSuperuser(sql => 'CREATE USER \'' . $adminname . '\'@\'localhost\' IDENTIFIED BY \''. $password . '\';'); 
+	$dbengine->sqlAsSuperuser(sql => 'GRANT ALL PRIVILEGES ON *.* TO \'' . $adminname . '\'@\'localhost\' WITH GRANT OPTION;');
 }
 
 sub _table
@@ -52,7 +64,6 @@ sub _table
            'fieldName'     => 'password',
            'printableName' => __('Password'),
            'editable'      => 1,
-           'defaultValue'  => 3360,
        ),
      );
 
