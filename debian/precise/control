@@ -1,7 +1,7 @@
 Source: zentyal-mysqladmin
 Section: web
 Priority: optional
-Maintainer: José Antonio Calvo <jacalvo@zentyal.org>
+Maintainer: Mateo Burillo <mburillo@zentyal.org>
 Build-Depends: zbuildtools
 Standards-Version: 3.9.2
 
