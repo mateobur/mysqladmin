@@ -32,11 +32,6 @@ use EBox::Config;
 use EBox::WebServer;
 use File::Slurp;
 
-use constant {
-#    HTTPD_WEBMAIL_DIR => '/var/www/webmail',
-};
-
-
 # Group: Protected methods
 
 # Constructor: _create
@@ -58,6 +53,7 @@ sub _create
                                       printableName => __('Mysql Manager'),
                                       @_);
     bless($self, $class);
+
     return $self;
 }
 
@@ -117,47 +113,14 @@ sub menu
               )
     );
 
-
     $root->add($folder);
-}
-
-# Method: usedFiles
-#
-#        Indicate which files are required to overwrite to configure
-#        the module to work. Check overriden method for details
-#
-# Overrides:
-#
-#        <EBox::Module::Service::usedFiles>
-#
-
-# Method: disableActions
-#
-#        Rollback those actions performed by <enableActions> to
-#        disable the module
-#
-# Overrides:
-#
-#        <EBox::Module::Service::disableActions>
-#
-sub disableActions
-{
-
-}
-
-#  Method: enableModDepends
-#
-#   Override EBox::Module::Service::enableModDepends
-#
-sub enableModDepends
-{
-    return ['webserver'];
 }
 
 sub _setWebServerConf
 {
     my ($self) = @_;
-    my @cmd = ();
+
+    my @cmd;
 
     my $vHostPattern = EBox::WebServer::SITES_AVAILABLE_DIR . 'user-' .
                        EBox::WebServer::VHOST_PREFIX. '*/ebox-mysqladmin';
@@ -196,8 +159,8 @@ sub initialSetup
 
     $self->SUPER::initialSetup($version);
 
-   if (not $version) {
-       # Create default rules only if installing the first time
+    unless ($version) {
+        # Create default rules only if installing the first time
         # Add localhost as default MySQL server
         $self->model('Hosts')->add(
             host => 'localhost',
@@ -205,6 +168,5 @@ sub initialSetup
         );
     }
 }
-
 
 1;
