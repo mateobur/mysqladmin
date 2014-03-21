@@ -124,7 +124,7 @@ sub _setWebServerConf
                        EBox::WebServer::VHOST_PREFIX. '*/ebox-mysqladmin';
     push(@cmd, 'rm -f ' . "$vHostPattern");
 
-    my $globalPattern = EBox::WebServer::GLOBAL_CONF_DIR . 'ebox-mysqladmin';
+    my $globalPattern = EBox::WebServer->GLOBAL_CONF_DIR . 'ebox-mysqladmin';
     push(@cmd, 'rm -f ' . "$globalPattern");
     EBox::Sudo::root(@cmd);
 
@@ -133,7 +133,7 @@ sub _setWebServerConf
     my $vhost = $self->model('Options')->vHostValue();
 
     if ($vhost eq 'disabled') {
-        my $destFile = EBox::WebServer::GLOBAL_CONF_DIR . 'ebox-mysqladmin';
+        my $destFile = EBox::WebServer->GLOBAL_CONF_DIR . 'ebox-mysqladmin';
         $self->writeConfFile($destFile, 'mysqladmin/apache.mas', []);
     } else {
         my $destFile = EBox::WebServer::SITES_AVAILABLE_DIR . 'user-' .
