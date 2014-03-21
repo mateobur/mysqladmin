@@ -121,25 +121,22 @@ sub _setWebServerConf
     my @cmd;
 
     my $vHostPattern = EBox::WebServer::SITES_AVAILABLE_DIR . 'user-' .
-                       EBox::WebServer::VHOST_PREFIX. '*/ebox-mysqladmin';
+                       EBox::WebServer::VHOST_PREFIX. '*/zentyal-mysqladmin';
     push(@cmd, 'rm -f ' . "$vHostPattern");
 
-    my $globalPattern = EBox::WebServer->GLOBAL_CONF_DIR . 'ebox-mysqladmin';
-    push(@cmd, 'rm -f ' . "$globalPattern");
     EBox::Sudo::root(@cmd);
 
     return unless $self->isEnabled();
 
     my $vhost = $self->model('Options')->vHostValue();
+    my $vhostEnabled = ((defined $vhost) and ($vhost ne 'disabled'));
 
-    if ($vhost eq 'disabled') {
-        my $destFile = EBox::WebServer->GLOBAL_CONF_DIR . 'ebox-mysqladmin';
-        $self->writeConfFile($destFile, 'mysqladmin/apache.mas', []);
-    } else {
-        my $destFile = EBox::WebServer::SITES_AVAILABLE_DIR . 'user-' .
-                       EBox::WebServer::VHOST_PREFIX. $vhost .'/ebox-mysqladmin';
-        $self->writeConfFile($destFile, 'mysqladmin/apache.mas', []);
+    my $destFile = EBox::WebServer::CONF_AVAILABLE_DIR . 'zentyal-mysqladmin.conf';
+    if ($vhostEnabled) {
+        $destFile = EBox::WebServer::SITES_AVAILABLE_DIR . 'user-' .
+                    EBox::WebServer::VHOST_PREFIX. "$vhost/zentyal-mysqladmin";
     }
+    $self->writeConfFile($destFile, 'mysqladmin/apache.mas', []);
 
     my $hostModel = $self->model('Hosts');
 
