@@ -56,7 +56,7 @@ sub _table
     my $dataTable =
     {
         tableName          => 'Admin',
-        printableTableName => __('MySQL Local Admins'),
+        printableTableName => __('MySQL Admins'),
         printableRowName   => __('Admins'),
         defaultActions     => ['add', 'del', 'editField', 'changeView' ],
         tableDescription   => \@tableHeader,

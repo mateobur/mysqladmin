@@ -98,16 +98,9 @@ sub menu
     );
 
     $folder->add(
-               new EBox::Menu::Item(
-                   'url' => 'MysqlAdmin/View/Hosts',
-                   'text' => 'MySQL Hosts',
-              )
-    );
-
-    $folder->add(
               new EBox::Menu::Item(
                   'url' => 'MysqlAdmin/View/Admin',
-                  'text' => 'MySQL Local Admins',
+                  'text' => 'MySQL Admins',
               )
     );
 
@@ -138,9 +131,6 @@ sub _setWebServerConf
     }
     $self->writeConfFile($destFile, 'mysqladmin/apache.mas', []);
 
-    my $hostModel = $self->model('Hosts');
-
-    $self->writeConfFile('/etc/phpmyadmin/config.inc.php','mysqladmin/config.inc.php.mas', [ sqlhosts => $hostModel->getHosts() ]);
 }
 
 # Method: initialSetup
@@ -154,14 +144,6 @@ sub initialSetup
 
     $self->SUPER::initialSetup($version);
 
-    unless ($version) {
-        # Create default rules only if installing the first time
-        # Add localhost as default MySQL server
-        $self->model('Hosts')->add(
-            host => 'localhost',
-            port => 3306,
-        );
-    }
 }
 
 1;
